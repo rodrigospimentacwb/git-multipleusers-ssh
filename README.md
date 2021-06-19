@@ -2,13 +2,13 @@
 
 ## Criar chaves e registrar no github
 
-1. gerar uma chave por usuario desejado
+1. Gerar uma chave por usuario desejado
 
 ```ssh-keygen -t rsa -C "usuario1@gmail.com" -f ~/.ssh/id_alias_pessoa```
 
 ```ssh-keygen -t rsa -C "usuario.trabalho@empresa.com.br" -f ~/.ssh/id_alias_empresarial```
 
-2. acessar via terminal a pasta '.ssh' na home/.ssh
+2. Acessar via terminal a pasta '.ssh' na home/.ssh
 
 3. Abrir os arquivos '.pub', copiar seu conteudo e colar dentro de cada conta do github em settings/SSH and GPG keys/new SSH key (Dar um nome a chave)
 
@@ -32,9 +32,7 @@ Host github_seualiasempresarial
   IdentityFile ~/.ssh/id_alias_empresarial
 ```
   
-6. Para o sistema auto-identificar a chave SSH, 
-basta na pasta de cada projeto mudar o repositorio de 'git@github.com' para 'git@github_seualiaspessoal'
-ou 'git@github_seualiasempresarial': 
+6. Para o sistema auto-identificar a chave SSH, basta na pasta de cada projeto mudar o repositorio de 'git@github.com' para 'git@github_seualiaspessoal' ou 'git@github_seualiasempresarial': 
 
 ```git remote origin set-url git@github_seualiaspessoal:seuusuariogit/seurepositoriogit.git```
 
