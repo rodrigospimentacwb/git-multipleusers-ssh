@@ -54,6 +54,14 @@ Ou
 git changeremotehost github.com github_seualiaspessoal
 ```
 
+8. Para clonar um novo projeto, alterar a url utilizando seu alias:
+
+```
+git@github.com:repodasuaempresa/repoprojeto.git
+Para:
+git@github_seualiasempresarial:repodasuaempresa/repoprojeto.git
+```
+
 Referência: [ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
 
 
