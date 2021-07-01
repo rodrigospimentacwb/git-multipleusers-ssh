@@ -36,32 +36,69 @@ Host github_seualiasempresarial
 
 ```git remote origin set-url git@github_seualiaspessoal:seuusuariogit/seurepositoriogit.git```
 
-7. Pode-se criar alias no arquivo '.gitconfig' na 'home':
-```
-	setpersonalemail = "config user.email 'pessoalemail@gmail.com'"
-	setempresarialemail = "config user.email 'empresarialemail@empresa.com.br'"
-	changeremotehost = !sh -c \"git remote -v | grep '$1.*fetch' | sed s/..fetch.// | sed s/$1/$2/ | xargs git remote set-url\"
-	gopersonal = !sh -c \"git changeremotehost github.com github_seualiaspessoal && git setpersonalemail\"
-	goempresarial = !sh -c \"git changeremotehost github.com github_seualiasempresarial && git setempresarialemail\"
-```
-
-8. Para clonar um novo projeto, alterar a url utilizando seu alias:
+7. Para clonar um novo projeto, alterar a url utilizando seu alias:
 
 ```
 git@github.com:repodasuaempresa/repoprojeto.git
 Para:
 git@github_seualiasempresarial:repodasuaempresa/repoprojeto.git
+
+Obs: Será solicitada a senha do arquivo SSH gerado no item 1 deste README para acesso ao repositório.
 ```
 
-## Uso:
+## Criando Alias + Bash para clonar os arquivos sem trocar a URL na mão
+
+Utilizando a forma abaixo, não precisará alterar a URL do git clone SSH quando for baixar um projeto.
+
+
+1. Criar um alias no .gitconfig global como no exemplo abaixo:
+
 ```
-git gopersonal
-```
-Ou
-```
-git changeremotehost github.com github_seualiaspessoal
+xclone = !sh -c \"$HOME/myBashGitUrlSSH.sh $1 \" 
 ```
 
-Referência: [ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
+1.1 Para o exemplo do item 2:
+
+```
+PESSOAL SSH: git@github.com:SEUREPO/SEUPROJETO.git -> git@github.ALIASSSHPESSOAL:SEUREPO/SEUPROJETO.git
+EMPRESARIAL SSH: git@github.com:REPOEMPRESA/PROJETOEMPRESA.git -> git@github.ALIASSSHEMPRESA:REPOEMPRESA/PROJETOEMPRESA.git
+```
+
+2. Criar o bash 'myBashGitUrlSSH.sh' na pasta '/home' onde esta seu .gitconfig global:
+
+```
+#!/bin/bash
+if [[ "$1" == *":REPOEMPRESA/"* ]]
+then
+	echo "Utilizando SSH Empresa"
+	git clone $(echo $1 | sed '\=\:REPOEMPRESA/= s=\.com:=\.ALIASSSHEMPRESA:=g')
+elif [[ "$1" == *":SEUREPO/"* ]] 
+then
+	echo "Utilizando SSH Pessoal"
+	git clone $(echo $1 | sed '\=\:SEUREPO/= s=\.com:=\.ALIASSSHPESSOAL:=g')
+else
+	echo "Dominio não configurado para SSH"
+fi
+```
+
+3. Liberar acesso ao 'myBashGitUrlSSH.sh' para não solitar sudo:
+
+```
+chmod +x myBashGitUrlSSH.sh
+```
+
+4. Uso:
+
+```
+git xclone git@github.com:SEUREPO/SEUPROJETO.git
+
+ou
+
+git@github.com:REPOEMPRESA/PROJETOEMPRESA.git
+
+Obs: Será solicitada a senha do arquivo SSH gerado no item 1 deste README para acesso ao repositório.
+```
+
+### Referência: [ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
 
 
