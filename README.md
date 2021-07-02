@@ -1,5 +1,20 @@
 # Configurar multiplas contas SSH no github
 
+### Importante:
+
+Antes de iniciar este tutorial, verifique se o arquivo /home/.gitconfig (global) do seu sistema esta sem nenhuma configuração prefixada (conforme exemplo abaixo). Preferencialmente faça um backup do arquivo.
+
+```
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	
+[alias]
+
+```
+
 ## Criar chaves e registrar no github
 
 1. Gerar uma chave por usuario desejado
@@ -72,10 +87,16 @@ if [[ "$1" == *":REPOEMPRESA/"* ]]
 then
 	echo "Utilizando SSH Empresa"
 	git clone $(echo $1 | sed '\=\:REPOEMPRESA/= s=\.com:=\.ALIASSSHEMPRESA:=g')
+	cd "$(basename "$1" .git)"
+	git config user.name "SEU_USUARIO_EMPRESARIAL_GIT"
+	git config user.email "SEU_EMAIL_EMPRESARIAL_GIT"
 elif [[ "$1" == *":SEUREPO/"* ]] 
 then
 	echo "Utilizando SSH Pessoal"
 	git clone $(echo $1 | sed '\=\:SEUREPO/= s=\.com:=\.ALIASSSHPESSOAL:=g')
+	cd "$(basename "$1" .git)"
+	git config user.name "SEU_USUARIO_PESSOAL_GIT"
+	git config user.email "SEU_EMAIL_PESSOAL_GIT"
 else
 	echo "Dominio não configurado para SSH"
 fi
