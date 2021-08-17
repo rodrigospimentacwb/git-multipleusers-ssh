@@ -19,9 +19,9 @@ Antes de iniciar este tutorial, verifique se o arquivo /home/.gitconfig (global)
 
 1. Gerar uma chave por usuario desejado
 
-```ssh-keygen -t rsa -C "usuario1@gmail.com" -f ~/.ssh/id_alias_pessoa```
+```$ ssh-keygen -t rsa -C "usuario1@gmail.com" -f ~/.ssh/id_alias_pessoa```
 
-```ssh-keygen -t rsa -C "usuario.trabalho@empresa.com.br" -f ~/.ssh/id_alias_empresarial```
+```$ ssh-keygen -t rsa -C "usuario.trabalho@empresa.com.br" -f ~/.ssh/id_alias_empresarial```
 
 2. Acessar via terminal a pasta '.ssh' na home/.ssh
 
@@ -29,7 +29,7 @@ Antes de iniciar este tutorial, verifique se o arquivo /home/.gitconfig (global)
 
 4. Criar dentro da pasta '.ssh' (caso não exista) o arquivo .config
 
-```touch ~/.ssh/config```
+```$ touch ~/.ssh/config```
 
 5. Editar este arquivo adicionando:
 
@@ -49,7 +49,7 @@ Host github_seualiasempresarial
   
 6. Para o sistema auto-identificar a chave SSH, basta na pasta de cada projeto mudar o repositorio de 'git@github.com' para 'git@github_seualiaspessoal' ou 'git@github_seualiasempresarial': 
 
-```git remote origin set-url git@github_seualiaspessoal:seuusuariogit/seurepositoriogit.git```
+```$ git remote origin set-url git@github_seualiaspessoal:seuusuariogit/seurepositoriogit.git```
 
 7. Para clonar um novo projeto, alterar a url utilizando seu alias:
 
@@ -105,17 +105,17 @@ fi
 3. Liberar acesso ao 'myBashGitUrlSSH.sh' para não solitar sudo:
 
 ```
-chmod +x myBashGitUrlSSH.sh
+$ chmod +x myBashGitUrlSSH.sh
 ```
 
 4. Uso:
 
 ```
-git xclone git@github.com:SEUREPO/SEUPROJETO.git
+$ git xclone git@github.com:SEUREPO/SEUPROJETO.git
 
 ou
 
-git@github.com:REPOEMPRESA/PROJETOEMPRESA.git
+$ git@github.com:REPOEMPRESA/PROJETOEMPRESA.git
 
 Obs: Será solicitada a senha do arquivo SSH gerado no item 1 deste README para acesso ao repositório.
 ```
