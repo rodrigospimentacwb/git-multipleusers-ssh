@@ -72,13 +72,6 @@ Utilizando a forma abaixo, não precisará alterar a URL do git clone SSH quando
 	xclone = !sh -c \"$HOME/myBashGitUrlSSH.sh $1 \" 
 	```
 
-1.1 Para o exemplo do item 2:
-
-	```
-	PESSOAL SSH: git@github.com:SEUREPO/SEUPROJETO.git -> git@github.ALIASSSHPESSOAL:SEUREPO/SEUPROJETO.git
-	EMPRESARIAL SSH: git@github.com:REPOEMPRESA/PROJETOEMPRESA.git -> git@github.ALIASSSHEMPRESA:REPOEMPRESA/PROJETOEMPRESA.git
-	```
-
 2. Criar o bash 'myBashGitUrlSSH.sh' na pasta '/home' onde esta seu .gitconfig global:
 
 	```
