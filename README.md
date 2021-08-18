@@ -35,13 +35,13 @@ Antes de iniciar este tutorial, verifique se o arquivo /home/.gitconfig (global)
 
 	```
 	# Pessoal github alias
-	Host github_seualiaspessoal
+	Host github.seualiaspessoalsemespacos
 	  HostName github.com
 	  User git
 	  IdentityFile ~/.ssh/id_alias_pessoa
 
 	# Professional github alias
-	Host github_seualiasempresarial
+	Host github.seualiasempresarialsemespacos
 	  HostName github.com
 	  User git
 	  IdentityFile ~/.ssh/id_alias_empresarial
@@ -74,31 +74,60 @@ Utilizando a forma abaixo, não precisará alterar a URL do git clone SSH quando
 
 2. Criar o bash 'myBashGitUrlSSH.sh' na pasta '/home' onde esta seu .gitconfig global:
 
+	```$ touch ~/myBashGitUrlSSH.sh```
+	
+	Dentro do arquivo adicionar e substituir os valores em CAPS para seus valores:
 	```
 	#!/bin/bash
-	if [[ "$1" == *":REPOEMPRESA/"* ]]
-	then
-		echo "Utilizando SSH Empresa"
-		git clone $(echo $1 | sed '\=\:REPOEMPRESA/= s=\.com:=\.ALIASSSHEMPRESA:=g')
-		cd "$(basename "$1" .git)"
-		git config user.name "SEU_USUARIO_EMPRESARIAL_GIT"
-		git config user.email "SEU_EMAIL_EMPRESARIAL_GIT"
-	elif [[ "$1" == *":SEUREPO/"* ]] 
+	if [[ "$1" == *":SEUREPO/"* ]]
 	then
 		echo "Utilizando SSH Pessoal"
-		git clone $(echo $1 | sed '\=\:SEUREPO/= s=\.com:=\.ALIASSSHPESSOAL:=g')
+		echo "clonando SSH: " $(echo $1 | sed '\=\:SEUREPO/= s=\.com:=\.SEUALIASPESSOALSEMESPACOS:=g')
+		git clone $(echo $1 | sed '\=\:SEUREPO/= s=\.com:=\.SEUALIASPESSOALSEMESPACOS:=g')
 		cd "$(basename "$1" .git)"
 		git config user.name "SEU_USUARIO_PESSOAL_GIT"
 		git config user.email "SEU_EMAIL_PESSOAL_GIT"
+
+	elif [[ "$1" == *":REPOEMPRESA/"* ]] 
+	then
+		echo "Utilizando SSH Empresa"
+		echo "clonando SSH: " $(echo $1 | sed '\=\:REPOEMPRESA/= s=\.com:=\.SEUALIASEMPRESARIALSEMESPACOS:=g')
+		git clone $(echo $1 | sed '\=\:REPOEMPRESA/= s=\.com:=\.SEUALIASEMPRESARIALSEMESPACOS:=g')
+		cd "$(basename "$1" .git)"
+		git config user.name "SEU_USUARIO_EMPRESARIAL_GIT"
+		git config user.email "SEU_EMAIL_EMPRESARIAL_GIT"
 	else
 		echo "Dominio não configurado para SSH"
 	fi
+	```
+	Exemplo:
+	
+	```
+	Arquivo config:
+	# Pessoal github alias
+	Host github.rodrigospimentacwb
+	  HostName github.com
+	  User git
+	  IdentityFile ~/.ssh/id_chave_ssh
+	  ...
+	```
+	```
+	Arquivo myBashGitUrlSSH.sh:
+	if [[ "$1" == *":rodrigospimentacwb/"* ]]
+	then
+		echo "Utilizando SSH Pessoal"
+		echo "clonando SSH: " $(echo $1 | sed '\=\:rodrigospimentacwb/= s=\.com:=\.rodrigospimentacwb:=g')
+		git clone $(echo $1 | sed '\=\:rodrigospimentacwb/= s=\.com:=\.rodrigospimentacwb:=g')
+		cd "$(basename "$1" .git)"
+		git config user.name "seuusuario"
+		git config user.email "seuemail@gmail.com"
+		...
 	```
 
 3. Liberar acesso ao 'myBashGitUrlSSH.sh' para não solitar sudo:
 
 	```
-	$ chmod +x myBashGitUrlSSH.sh
+	$ chmod +x ~/myBashGitUrlSSH.sh
 	```
 
 4. Uso:
