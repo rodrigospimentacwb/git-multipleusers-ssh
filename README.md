@@ -143,7 +143,7 @@ Utilizando a forma abaixo, não precisará alterar a URL do git clone SSH quando
 	```
 
 METODO LOCAL:
-
+```
 [user]
         name = usuario
         email = email@gmail.com
@@ -160,7 +160,11 @@ METODO LOCAL:
 [remote "origin"]
 	url = git@github.com:repogit/myapp.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
+```
 
-### Referência: [ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
+### Referências: 
 
+[ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
+
+[Lukas Lukac](https://dev.to/web3coach/how-to-configure-a-local-git-repository-to-use-a-specific-ssh-key-4aml)
 
