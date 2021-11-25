@@ -142,6 +142,25 @@ Utilizando a forma abaixo, não precisará alterar a URL do git clone SSH quando
 	Obs: Será solicitada a senha do arquivo SSH gerado no item 1 deste README para acesso ao repositório.
 	```
 
+METODO LOCAL:
+
+[user]
+        name = usuario
+        email = email@gmail.com
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+
+	sshCommand = "ssh -i ~/.ssh/id_rsa_alias"
+
+[remote "origin"]
+	url = git@github.com:repogit/myapp.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+
 ### Referência: [ArnaudRinquin](https://github.com/ArnaudRinquin/blog/blob/master/2014-03-11-one-command-github-account-switch.md)
 
 
